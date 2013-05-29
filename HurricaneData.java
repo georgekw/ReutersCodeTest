@@ -4,9 +4,8 @@ import java.util.Scanner;
 
 public class HurricaneData {
 
-  private int TRange = Integer.MAX_VALUE;
-	private int DyIndex = 0, MxTIndex = 0, MnTIndex = 0;
-	private String Day;
+	private String HurricaneName = "";
+	private int MxW = 0, MnP = Integer.MAX_VALUE;
 	
 	public boolean isInteger(String s) {
 		try {
@@ -17,34 +16,39 @@ public class HurricaneData {
 	    return true;
 	}
 	
-	public String filterString(String s) {
-		if (s.contains("*"))
-			s = s.replace("*", "");
-		return s;
+	public double convertFromKnotsToKMpH (double knots) {
+		return 1.852*knots;
+	}
+	
+	public void printWeatherData() {
+		System.out.println("Storm name: " + HurricaneName + ". Maximum sustained wind: " + convertFromKnotsToKMpH(MxW) + " km/h. Minimum pressure: " + MnP + " mbar.");
 	}
 	
 	public void procWeatherData(String s) {
-		s = s.replaceAll("\\s+", " ").trim();		//Replace all white spaces with a single whitespace
-		String[] weatherData = s.split(" ");
-		int tempRange;
-		
-		for (int i=0; i<weatherData.length; i++) {
-			weatherData[i] = filterString(weatherData[i]);
-			if (weatherData[i].equals("Dy"))
-				DyIndex = i;
-			else if (weatherData[i].equals("MxT"))
-				MxTIndex = i;
-			else if (weatherData[i].equals("MnT"))
-				MnTIndex = i;
+		String[] weatherData = s.split(",");
+		if (weatherData.length < 4) {
+			if (!HurricaneName.isEmpty()) {
+				printWeatherData();
+				MxW = 0;
+				MnP = Integer.MAX_VALUE;
+			} 
+			HurricaneName = weatherData[1].trim();
+		} else {
+				int windspeed = 0;
+				int pressure = Integer.MAX_VALUE;
+				if (isInteger(weatherData[6].trim())) {
+					windspeed = Integer.parseInt(weatherData[6].trim());
+				}
+				if (windspeed > MxW) {
+					MxW = windspeed;
+				}
+				if (isInteger(weatherData[7].trim())) {
+					pressure = Integer.parseInt(weatherData[7].trim());
+				}
+				if (pressure < MnP) {
+					MnP = pressure;
+				}
 		}
-		if (isInteger(weatherData[MxTIndex]) && isInteger(weatherData[MnTIndex])) {
-			tempRange = Integer.parseInt(weatherData[MxTIndex]) - Integer.parseInt(weatherData[MnTIndex]);
-			//System.out.println("Day: " + weatherData[DyIndex] + " Range: " + tempRange);
-			if (tempRange < TRange) {
-				TRange = tempRange;
-				Day = weatherData[DyIndex];
-			}
-		}	
 	}
 	
 	public void readWeatherData() throws Exception {
@@ -52,15 +56,11 @@ public class HurricaneData {
 		Scanner input = new Scanner(file);
 		while (input.hasNext()) {
 			String line = input.nextLine();
-			if (line.regionMatches(4, "2009", 0, 4)) {
-				System.out.println(line);
-				/*while (input.hasNext()) {
-					String line = input.nextLine();
-					System.out.println(line);
-					if (line.regionMatches(4, "2010", 0, 4)) {
-						break;
-					}
-				}*/
+			if (line.regionMatches(4, "2009", 0, 4) || line.startsWith("2009")) {
+				if (line.regionMatches(4, "2010", 0, 4)) {
+					break;
+				} else
+					procWeatherData(line);
 			}
 		}
 		input.close();
@@ -68,7 +68,6 @@ public class HurricaneData {
 	public static void main(String[] args) throws Exception {
 		HurricaneData hd = new HurricaneData();
 		hd.readWeatherData();
-		//System.out.println("The smallest temperature spread occured on day " + hd.Day + " with a range of " + hd.TRange + ".");	
 	}
 
 }
