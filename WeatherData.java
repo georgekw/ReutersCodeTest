@@ -3,9 +3,9 @@ package codeTest;
 import java.util.Scanner;
 
 public class WeatherData {
-  
+	
 	private int TRange = Integer.MAX_VALUE;
-	private int DyIndex = 0, MxTIndex = 0, MnTIndex = 0;
+	private int DyIndex, MxTIndex, MnTIndex;
 	private String Day;
 	
 	public boolean isInteger(String s) {
@@ -24,10 +24,13 @@ public class WeatherData {
 	}
 	
 	public void procWeatherData(String s) {
-		s = s.replaceAll("\\s+", " ").trim();		//Replace all white spaces with a single whitespace
+		s = s.replaceAll("\\s+", " ").trim();		/* Replace all whitespace with a single whitespace */
 		String[] weatherData = s.split(" ");
 		int tempRange;
 		
+		/*
+		 * Data column mapping
+		 */
 		for (int i=0; i<weatherData.length; i++) {
 			weatherData[i] = filterString(weatherData[i]);
 			if (weatherData[i].equals("Dy"))
