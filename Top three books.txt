@@ -1,0 +1,15 @@
+Top three books that have made me a better software programmer:
+
+In no particular order, I would like to mention "Concepts, Techniques, and Models of Computer Programming" by
+Peter Van Roy and Seif Haridi. This book has provided me a good insight in different programming techniques and design
+principles. It was enjoyable to experience how different problems can be solved in a non-intuitive way and also learn
+about the stepping stones of programming languages.
+
+The second book I would like to mention is "Introduction to Algorithms" by Cormen, Leiserson, Rivest and Stein.
+This book made me interested in algortihms in general as well as it taught me how to approach NP-complete problems.
+Another part I liked was the focus on optimizing codes in terms of run time and how that could be achieved by using
+different data structures.
+
+Finally, because of my interest in algorithms, the book "Artificial Intelligence" by Russel and Norvig is very
+interesting as the main theme is about the idea of an intelligent agent. Different problem-solving search algorithms are
+presented in a good way that gave me a better understanding of how knowledge and intelligence can be programmed.
