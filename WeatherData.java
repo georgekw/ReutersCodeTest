@@ -42,7 +42,6 @@ public class WeatherData {
 		}
 		if (isInteger(weatherData[MxTIndex]) && isInteger(weatherData[MnTIndex])) {
 			tempRange = Integer.parseInt(weatherData[MxTIndex]) - Integer.parseInt(weatherData[MnTIndex]);
-			//System.out.println("Day: " + weatherData[DyIndex] + " Range: " + tempRange);
 			if (tempRange < TRange) {
 				TRange = tempRange;
 				Day = weatherData[DyIndex];
