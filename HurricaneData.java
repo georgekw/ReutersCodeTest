@@ -9,11 +9,11 @@ public class HurricaneData {
 	
 	public boolean isInteger(String s) {
 		try {
-	        Integer.parseInt(s); 
-	    } catch(NumberFormatException e) { 
-	        return false; 
-	    }
-	    return true;
+	        	Integer.parseInt(s); 
+	    	} catch(NumberFormatException e) { 
+	        	return false; 
+		}
+	    		return true;
 	}
 	
 	public double convertFromKnotsToKMpH (double knots) {
