@@ -10,11 +10,11 @@ public class WeatherData {
 	
 	public boolean isInteger(String s) {
 		try {
-	        Integer.parseInt(s); 
-	    } catch(NumberFormatException e) { 
-	        return false; 
-	    }
-	    return true;
+	        	Integer.parseInt(s); 
+		} catch(NumberFormatException e) { 
+	        	return false; 
+	    	}
+		return true;
 	}
 	
 	public String filterString(String s) {
