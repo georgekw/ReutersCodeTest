@@ -7,36 +7,36 @@ public class Weekday {
 	public ArrayList<Date> getWeekdays(GregorianCalendar startDate, GregorianCalendar endDate) {
 		ArrayList<Date> weekdays = new ArrayList<Date>();
 
-	    if ((startDate == null) || (endDate == null))
-	    	return weekdays;
+		if ((startDate == null) || (endDate == null))
+	    		return weekdays;
 
-	    if (startDate.equals(endDate)) {
-	    	if (isWeekday(startDate)) {
-	    		weekdays.add(startDate.getTime());
-	        }
-	    }
-	    else if (startDate.after(endDate)) {
-	    	weekdays = getWeekdays(endDate, startDate);
-	    }
-	    else {
-	    	GregorianCalendar d = startDate;
-	        while (d.before(endDate) || d.equals(endDate)) {
-	        	if (isWeekday(d)) {
-	        		weekdays.add(d.getTime());
-	            }  
-	            d.add(Calendar.DATE, 1);
-	        }	       
-	   }
-	   return weekdays;
+	    	if (startDate.equals(endDate)) {
+	    		if (isWeekday(startDate)) {
+	    			weekdays.add(startDate.getTime());
+	        	}
+	    	}
+	    	else if (startDate.after(endDate)) {
+	    		weekdays = getWeekdays(endDate, startDate);
+	    	}
+	    	else {
+	    		GregorianCalendar d = startDate;
+	        	while (d.before(endDate) || d.equals(endDate)) {
+	        		if (isWeekday(d)) {
+	        			weekdays.add(d.getTime());
+	            		}  
+	            	d.add(Calendar.DATE, 1);
+	        	}	       
+		}
+	   	return weekdays;
 	}
 	
 	public boolean isWeekday(GregorianCalendar d) {
 		if (d == null)
 			return false;
 
-	    int dayOfWeek = d.get(Calendar.DAY_OF_WEEK);
+	    	int dayOfWeek = d.get(Calendar.DAY_OF_WEEK);
 	    
-	    return ((dayOfWeek >= Calendar.MONDAY) && (dayOfWeek <= Calendar.FRIDAY));
+	    	return ((dayOfWeek >= Calendar.MONDAY) && (dayOfWeek <= Calendar.FRIDAY));
 	}
 
 	public static void main(String[] args) {
